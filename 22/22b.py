@@ -29,7 +29,8 @@ class State(object):
 		self.ecoords = ecoords
 		self.step = step
 		# heuristic is distance between data & target, and empty cell and data
-		self.H = manhattanDist(dcoords,TARGET) + manhattanDist(ecoords,dcoords) + step
+		# self.H = manhattanDist(dcoords,TARGET) + manhattanDist(ecoords,dcoords) + (5*step)
+		self.H = step
 
 	def swap(self,n1,n2):
 		n1.used,n2.used = n2.used,n1.used
@@ -117,7 +118,7 @@ INITIAL_STATE = State(GRID,0,EMPTY_COORDS,DATA_COORDS)
 QUEUE.put((INITIAL_STATE.H,INITIAL_STATE))
 while QUEUE.qsize() > 0:
 	priority,state = QUEUE.get()
-	# print state,state.step,state.H
+	print state,state.step,state.H
 
 	# victory condition
 	if state.dcoords == TARGET:
